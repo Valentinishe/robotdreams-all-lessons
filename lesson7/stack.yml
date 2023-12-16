@@ -1,0 +1,120 @@
+AWSTemplateFormatVersion: 2010-09-09
+Metadata:
+  'AWS::CloudFormation::Designer':
+    1487b8df-dbc0-44a9-a605-e80668a02c25:
+      size:
+        width: 780
+        height: 630
+      position:
+        x: 1700
+        'y': -110
+      z: 1
+      embeds: []
+    3389fafc-40cd-4ad8-bb0d-a36ae701ecf0:
+      size:
+        width: 150
+        height: 150
+      position:
+        x: 1410
+        'y': -100
+      z: 1
+      embeds: []
+    706b611c-aff7-4670-a5b1-eb9d1dca5db4:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 1230
+        'y': 30
+      z: 1
+      embeds: []
+    918aa29e-6e42-432a-ada5-ae01b4c48ae2:
+      source:
+        id: 706b611c-aff7-4670-a5b1-eb9d1dca5db4
+      target:
+        id: 1487b8df-dbc0-44a9-a605-e80668a02c25
+      z: 1
+    17326f5c-b778-4266-b1a6-963f7acd5fd3:
+      size:
+        width: 150
+        height: 150
+      position:
+        x: 900
+        'y': 360
+      z: 1
+      embeds: []
+    fb43a98f-ba89-4b4b-b145-06ece0306882:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 1050
+        'y': 30
+      z: 1
+      embeds: []
+    b4d502eb-e0cc-481b-ae03-7988bc779ef5:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 890
+        'y': -60
+      z: 1
+      embeds: []
+Resources:
+  DevopsVPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CirdBlock: 10.0.0.0/16
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 1487b8df-dbc0-44a9-a605-e80668a02c25
+  SubnetPublicA:
+    Type: 'AWS::EC2::Subnet'
+    Properties:
+      CidrBlock: 10.0.11.0/24
+      AvailabilityZone: us-west-2a
+      VpcId: !Ref DevopsVPC
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 3389fafc-40cd-4ad8-bb0d-a36ae701ecf0
+  PublicInternetGateway:
+    Type: 'AWS::EC2::InternetGateway'
+    Properties:
+      VpcId: !Ref DevopsVPC
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 706b611c-aff7-4670-a5b1-eb9d1dca5db4
+  AttachPublicInternetGateway:
+    Type: 'AWS::EC2::VPCGatewayAttachment'
+    Properties:
+      InternetGatewayId: !Ref PublicInternetGateway
+      VpcId: !Ref DevopsVPC
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 918aa29e-6e42-432a-ada5-ae01b4c48ae2
+  PublicRouteTable:
+    Type: 'AWS::EC2::RouteTable'
+    Properties:
+      VpcId: !Ref DevopsVPC
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: 17326f5c-b778-4266-b1a6-963f7acd5fd3
+  PublicRoute:
+    DependsOn: PublicInternetGateway
+    Type: 'AWS::EC2::Route'
+    Properties:
+      GatewayId: !Ref PublicInternetGateway
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: fb43a98f-ba89-4b4b-b145-06ece0306882
+  PublicSubnetARouteTableAssociation:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref SubnetPublicA
+    Metadata:
+      'AWS::CloudFormation::Designer':
+        id: b4d502eb-e0cc-481b-ae03-7988bc779ef5
