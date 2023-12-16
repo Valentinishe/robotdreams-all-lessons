@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  database:
+    image: valentynishe/mongodb-l11:1.2
+    deploy: 
+      replicas: 1
+    ports:
+      - "27017:27017"
+
+  server:
+    depends_on:
+      - database
+    image: valentynishe/express-app-l11:1.2
+    ports:
+      - "80:80"
+    deploy: 
+      replicas: 3
+
+  visualizersvc:
+    image: dockersamples/visualizer
+    depends_on:
+      - database
+      - server
+    deploy:
+      placement:
+        constraints:
+          - 'node.role==manager'
+    ports:
+      - '5000:8080'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
