@@ -1,0 +1,28 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "db" do |db|
+    db.vm.box = "spox/ubuntu-arm"
+    db.vm.box_version = "1.0.0"
+    db.vm.provision "shell", path: "./scripts/db.sh"
+    db.vm.network "private_network", ip: "10.0.0.10"
+    db.vm.network "forwarded_port", guest: 27017, host: 27017
+    db.vm.provider :vmware_desktop do |vmware|
+      vmware.gui = false
+      vmware.cpus = 1
+      vmware.ssh_info_public = true
+      vmware.linked_clone = false
+    end
+  end
+  config.vm.define "app" do |app|
+    app.vm.box = "spox/ubuntu-arm"
+    app.vm.box_version = "1.0.0"
+    app.vm.synced_folder "./app", "/home/vagrant/app"
+    app.vm.provision "shell", path: "./scripts/app.sh"
+    app.vm.network "forwarded_port", guest: 3000, host: 80
+    app.vm.provider :vmware_desktop do |vmware|
+      vmware.gui = false
+      vmware.cpus = 2
+      vmware.ssh_info_public = true
+      vmware.linked_clone = false
+    end
+  end
+end
