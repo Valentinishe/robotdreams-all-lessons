@@ -1,0 +1,125 @@
+[
+  {
+    $match:
+      /**
+       * query: The query in MQL.
+       */
+      {
+        _id: "c1",
+      },
+  },
+  {
+    $lookup:
+      /**
+       * from: The target collection.
+       * localField: The local join field.
+       * foreignField: The target join field.
+       * as: The name for the results.
+       * pipeline: Optional pipeline to run on the foreign collection.
+       * let: Optional variables to use in the pipeline field stages.
+       */
+      {
+        from: "memberships",
+        localField: "_id",
+        foreignField: "clientId",
+        as: "results-memberships",
+      },
+  },
+  {
+    $project:
+      /**
+       * specifications: The fields to
+       *   include or exclude.
+       */
+      {
+        name: "$name",
+        clientId: "$_id",
+        membership: {
+          $first: "$results-memberships",
+        },
+      },
+  },
+  {
+    $lookup:
+      /**
+       * from: The target collection.
+       * localField: The local join field.
+       * foreignField: The target join field.
+       * as: The name for the results.
+       * pipeline: Optional pipeline to run on the foreign collection.
+       * let: Optional variables to use in the pipeline field stages.
+       */
+      {
+        from: "trainers",
+        localField: "membership.trainerId",
+        foreignField: "_id",
+        as: "results-trainers",
+      },
+  },
+  {
+    $lookup:
+      /**
+       * from: The target collection.
+       * localField: The local join field.
+       * foreignField: The target join field.
+       * as: The name for the results.
+       * pipeline: Optional pipeline to run on the foreign collection.
+       * let: Optional variables to use in the pipeline field stages.
+       */
+      {
+        from: "workouts",
+        localField: "membership.workoutId",
+        foreignField: "_id",
+        as: "results-workouts",
+      },
+  },
+  {
+    $project:
+      /**
+       * specifications: The fields to
+       *   include or exclude.
+       */
+      {
+        name: "$name",
+        clientId: "$_id",
+        membership: {
+          _id: "membership._id",
+          startAt: "$membership.startAt",
+          endAt: "$membership.endAt",
+          type: "$membership.type",
+        },
+        workout: {
+          $first: "$results-workouts",
+        },
+        trainer: {
+          $first: "$results-trainers",
+        },
+      },
+  },
+]
+
+
+---------------
+RESULTS
+==============
+{
+  "_id": "c1",
+  "membership": {
+    "_id": "membership._id",
+    "startAt": "2021-01-01",
+    "endAt": "2021-01-31",
+    "type": "basic"
+  },
+  "name": "John",
+  "clientId": "c1",
+  "workout": {
+    "_id": "w1",
+    "description": "Really difficult",
+    "difficulty": 90
+  },
+  "trainer": {
+    "_id": "t2",
+    "name": "Barbara",
+    "specialization": "Crossfit"
+  }
+}
