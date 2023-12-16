@@ -1,0 +1,59 @@
+
+Пункт #1:
+1) Запустити VMs і перейти в першу VM
+- vagrant up
+- vagrant ssh vm1
+2) Створитти директорію 
+- mkdir files
+3) Створити файл grades.txt
+- touch grades.txt
+- nano grades.txt
+- ctrl+v + ctrl+o + ctrl+x + enter
+4) Створити haproxy.log
+- touch haproxy.log
+- nano haproxy.log
+- ctrl+v + ctrl+o + ctrl+x + enter
+5) Виконати архівацію 
+- tar -cvf files.tar haproxy.log grades.txt
+
+
+Пункт #2:
+1) Знайти IPs VMs: (VM2 - 172.16.103.166 & VM1 - 172.16.103.163)
+2) Створити директорію (VM2)
+- cd /home/vagrant/files
+- mkdir files 
+3) Виконати переміщення файлів за допомогою rsync 
+- rsync /home/vagrant/files/haproxy.log vagrant@172.16.103.166:/home/vagrant/files
+- rsync /home/vagrant/files/grades.txt vagrant@172.16.103.166:/home/vagrant/files
+4)Виконати переміщення архіву за допомогою scp
+- scp /home/vagrant/files/files.tar vagrant@172.16.103.166:/home/vagrant/files
+
+Пункт #3
+1) Перейти в директорію
+- cd /home/vagrant/files
+2) Виконати скрипт
+- sudo grep -E '([4-5]){1}([0-9]{2})'  ./haproxy.log
+
+Пункт #4
+1) Додати крон
+- type: crontab -e
+- set:  */3 * * * * sudo /home/vagrant/crontask.bash >> /home/vagrant/crontask.txt
+2) Створити файл для логів
+- touch crontask.txt
+3) Створити файл для скрипту та надати права на виконаня
+- touch crontask.bash 
+- chmod 755 crontask.bash
+4) Написання скрипту
+- nano crontask.bash
+- set: echo $(date +'%Y/%m/%d %H:%M:%S')
+- ctrl+o + ctrl+x + enter
+
+Пункт #5
+1) Визначення місця на VM2 (жорсткий диск) 
+- df -h
+2) Визначення місця на VM2 (оперативна памʼять)
+- free -h 
+3) Визначення використаних inodes
+- stat .
+4) Визначити кількість файлів у /var/log за допомогою wc 
+- ls /var/log | wc -l

@@ -1,0 +1,52 @@
+<DATE> <TIME> <SERVER_NAME> <PROCESS_ID> <FRONTEND_NAME>/<BACKEND_NAME>/<SERVER_NAME> <CLIENT_IP>:<CLIENT_PORT> <REQUEST> <STATUS_CODE> <BYTES_READ> <TIME_TOTAL> <FRONTEND_NAME> <BACKEND_NAME> <SERVER_NAME> <TIME_QUEUE> <TIME_BACKEND> <TIME_SERVER> <TIME_TAKEN> <ERROR_MESSAGE>
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:25:45 haproxy-server 5678 frontend/backend/server 192.168.1.101:80 POST /login 500 5120 0.010 0.002 0.005 0.003 0.015 Internal server error
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /list-page 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /goals 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /avatars 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /goals 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /exams 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:25:45 haproxy-server 5678 frontend/backend/server 192.168.1.101:80 POST /user-page 500 5120 0.010 0.002 0.005 0.003 0.015 Internal server error
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /list-page 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /avatars 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /goals 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /list-page 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /goals 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /avatars 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /goals 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /avatars 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:15:20 haproxy-server 1234 frontend/backend/server 192.168.1.100:80 GET /main-docs 200 1024 0.005 0.001 0.002 0.002 0.010
+2023-10-19 10:35:10 haproxy-server 9876 frontend/backend/server 192.168.1.102:80 GET /user-info 404 2048 0.008 0.002 0.004 0.002 0.012 Page not found
