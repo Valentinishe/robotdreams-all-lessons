@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  database:
+    container_name: database
+    build:
+      context: db_network
+    image: mongodb
+    restart: on-failure
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: toster
+    networks: 
+      - mongo-compose-network
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb-data:/data/db
+      - mongodb-log:/var/log/mongodb
+
+  server:
+    depends_on:
+      - database
+    container_name: server
+    build:
+      context: server_network
+    image: nodejs
+    restart: on-failure
+    environment:
+      MONGODB_API: mongodb://root:root@database:27017/toster
+    networks: 
+      - mongo-compose-network
+    ports:
+      - 80:3000
+
+volumes:
+  mongodb-data:
+    driver: local
+  mongodb-log:
+    driver: local
+
+networks:
+  mongo-compose-network:
+    driver: bridge
+      

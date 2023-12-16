@@ -1,0 +1,13 @@
+FROM node:16.20
+
+WORKDIR /app
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+# ENV MONGO_INITDB_ROOT_USERNAME=root
+# ENV MONGO_INITDB_ROOT_PASSWORD=root
+# ENV MONGO_INITDB_DATABASE=toster
+
+CMD npm start
