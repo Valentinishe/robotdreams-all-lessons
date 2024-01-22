@@ -1,0 +1,33 @@
+- name: Install nginx
+  ansible.builtin.apt:
+    update_cache: yes
+    state: latest
+    name: nginx
+  notify: Start Nginx
+
+- name: Creates nginx directories
+  ansible.builtin.file:
+    path: /{{item}}
+    state: directory
+  loop:
+    - etc/nginx/sites-enabled
+    - etc/nginx/sites-available
+    - usr/share/nginx
+    - usr/share/nginx/html
+
+- name: Copy nginx config file
+  copy:
+    src: files/nginx.conf
+    dest: /etc/nginx/sites-available/default
+  notify: Restart Nginx
+
+- name: Enable configuration
+  file:
+    src: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-enabled/default
+    state: link
+  notify: Restart Nginx
+
+- name: Generate index.html
+  template: src=templates/index.html.j2 dest=/usr/share/nginx/html/index.html
+  notify: Restart Nginx

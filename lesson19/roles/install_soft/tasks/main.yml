@@ -1,0 +1,11 @@
+- name: Install additional software
+  ansible.builtin.apt:
+    update_cache: yes
+    state: latest
+    name:
+      - curl
+      - wget
+      - git
+      - mc
+      - tree
+      - vim

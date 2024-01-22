@@ -1,0 +1,8 @@
+- name: Install inginx and configure it
+  hosts: servers
+  become_user: root
+  become_method: sudo
+  become: true
+  roles:
+    - ping
+    - web_server

@@ -1,0 +1,5 @@
+---
+mysql_database: "myapp"
+mysql_user: "developer"
+mysql_password: "3AMTf?DcXxpczeaUPx2_?tTethw4aFmF"
+mysql_random_root_password: "true"

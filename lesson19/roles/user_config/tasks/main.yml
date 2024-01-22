@@ -1,0 +1,35 @@
+  ### USER CONFIGURATION ###
+  - name: Create group
+    group:
+      name: "{{ group_name }}"
+      state: present
+
+  - name: Create User
+    user:
+      name: "{{ user_name }}"
+      state: present
+      password: "{{ user_password }}"
+      shell: /bin/bash
+      groups: "{{ group_name }}"
+
+  ### SSH CONFIGURATION ###
+
+  - name: Ensure authorized_keys directory exists
+    become_user: root
+    file:
+      path: "~/.ssh"
+      state: directory
+      mode: "0700"
+
+  - name: Copy id_rsa.pub content to authorized_keys
+    become_user: root
+    copy:
+      content: "../files/id_rsa.pub"
+      dest: "~/.ssh/authorized_keys"
+      mode: "0600"
+
+  - name: Added new directory colors to .bashrc
+    lineinfile:
+      path: "~/.bashrc"
+      state: present
+      line:   "LS_COLORS=$LS_COLORS:'di=1;4;31;42' ; export LS_COLORS"   

@@ -1,0 +1,11 @@
+- name: Install nginx, mysql, others and configure isntances (FULL_PLAYBOOK)
+  hosts: servers
+  become_user: root
+  become_method: sudo
+  become: true
+  roles:
+    - ping
+    - user_config
+    - install_soft
+    - web_server
+    - mysql_server

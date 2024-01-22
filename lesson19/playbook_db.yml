@@ -1,0 +1,8 @@
+- name: Install Mysql Database and configure it
+  hosts: servers
+  become_user: root
+  become_method: sudo
+  become: true
+  roles:
+    - ping
+    - mysql_server
