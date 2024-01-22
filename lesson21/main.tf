@@ -3,7 +3,9 @@ provider "aws" {
 }
 
 resource "aws_vpc" "VPC" {
-  cidr_block = var.vpc_cidr
+  cidr_block           = var.vpc_cidr
+  enable_dns_hostnames = true
+  enable_dns_support   = true
   tags = {
     Name = "VPC_TERRAFORM"
     ENV  = var.env
@@ -13,6 +15,7 @@ resource "aws_vpc" "VPC" {
 resource "aws_subnet" "PUBLIC_VPC" {
   vpc_id                  = aws_vpc.VPC.id
   cidr_block              = var.public_subnet_cidr
+  availability_zone       = var.availability_zone
   map_public_ip_on_launch = true
   tags = {
     Name = "PUBLIC_SUBNET_TERRAFORM"
@@ -62,8 +65,8 @@ resource "aws_security_group" "VPC_SG" {
   ingress {
     from_port   = 22
     to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/24"]
+    protocol    = "TCP"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
     from_port   = 0
@@ -73,9 +76,28 @@ resource "aws_security_group" "VPC_SG" {
   }
 }
 
+resource "aws_security_group_rule" "VPC_SG_RULE" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "TCP"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.VPC_SG.id
+}
+
+resource "aws_security_group_rule" "VPC_SG_RULE2" {
+  type              = "ingress"
+  from_port         = 3306
+  to_port           = 3306
+  protocol          = "TCP"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.VPC_SG.id
+}
+
 resource "aws_instance" "JENKINS_INSTANCE" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
+  key_name               = var.key_pair_name
   subnet_id              = aws_subnet.PUBLIC_VPC.id
   vpc_security_group_ids = [aws_security_group.VPC_SG.id]
   tags = {
@@ -88,6 +110,7 @@ resource "aws_instance" "JENKINS_INSTANCE" {
 resource "aws_instance" "LAB_INSTANCE" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
+  key_name               = var.key_pair_name
   subnet_id              = aws_subnet.PUBLIC_VPC.id
   vpc_security_group_ids = [aws_security_group.VPC_SG.id]
   tags = {
@@ -95,4 +118,12 @@ resource "aws_instance" "LAB_INSTANCE" {
     ENV  = var.env
     Role = "Lab"
   }
+}
+
+resource "aws_eip" "VPC_JENKINS_EIP" {
+  instance = aws_instance.JENKINS_INSTANCE.id
+}
+
+resource "aws_eip" "VPC_LAB_EIP" {
+  instance = aws_instance.LAB_INSTANCE.id
 }
