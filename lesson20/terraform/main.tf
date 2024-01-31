@@ -64,7 +64,7 @@ resource "aws_security_group" "VPC_SG" {
   vpc_id      = aws_vpc.VPC.id
 
   ingress = [
-    for port in [22, 80, 443, 8080] : {
+    for port in [22, 80, 443, 8080, 3000] : {
       description      = "TLS from VPC"
       from_port        = port
       to_port          = port

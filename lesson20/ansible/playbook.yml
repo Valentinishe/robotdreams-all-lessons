@@ -61,94 +61,16 @@
         dest: "{{ playbook_dir }}/initialAdminPassword"
         flat: yes
 
+    - name: Ansible shell module multiple commands
+      shell: 'curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -'
+    
+    - name: Install nodejs
+      apt:
+        name: nodejs
+
+    - name: setup NVM for jenkins
+      shell: export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
     - name: Print initialAdminPassword
       debug:
         msg: "Your initialAdminPassword is {{ lookup('file', '{{ playbook_dir }}/initialAdminPassword') }}"
-        
-    # - name: Download Jenkins repo key
-    # #   apt_key:
-    # #     url: "{{ jenkins_repo_url }}"
-    # #     dest: /usr/share/keyrings/jenkins-keyring.asc
-    # #     state: present
-    #   become: true
-    #   ansible.builtin.get_url:
-    #     url: "{{ jenkins_repo_url }}"
-    #     dest: /usr/share/keyrings/jenkins-keyring.asc
-    # - name: Ensure the repository is configured
-    #   apt_repository: repo='deb https://pkg.jenkins.io/debian-stable binary/' state=present
-    #   become: true
-    # - name: Update all packages to their latest version
-    #   apt:
-    #     # force_apt_get: yes
-    #     # force: yes
-    #     update_cache: yes
-    #     upgrade: full
-    #     state: latest
-    #   # become: true
-    # - name: Install Java
-    #   apt:
-    #     name: "{{ java }}"
-    #     state: present
-    #   # become: true
-    # - name: Install Jenkins
-    #   apt:
-    #     name: jenkins
-    #     state: present
-    #   # become: true
-    # - name: Start Jenkins
-    #   service:
-    #     name: jenkins
-    #     state: started
-    #     enabled: yes
-    #   # become: true
-
-
-
-
-
-
-
-
-
-    # - name: Update all packages to their latest version
-    #   apt:
-    #     upgrade: full
-    # - name: download jenkins key
-    #   ansible.builtin.get_url:
-    #     url: https://pkg.jenkins.io/debian/jenkins-ci.org.key
-    #     dest: /usr/share/keyrings/jenkins-keyring.asc
-    # - name: Add Jenkins repo
-    #   ansible.builtin.apt_repository:
-    #     repo: deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/
-    #     state: present
-    #     filename: jenkins.list  
-
-
-
-
-    # - name: Update all packages to their latest version
-    #   apt:
-    #     name: "*"
-    #     state: latest
-    # - name: download jenkins key
-    #   ansible.builtin.get_url:
-    #     url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
-    #     dest: /usr/share/keyrings/jenkins-keyring.asc
-    # - name: Add Jenkins repo
-    #   ansible.builtin.apt_repository:
-    #     repo: deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/
-    #     state: present
-    #     filename: jenkins.list  
-    # - name: Update all packages to their latest version
-    #   apt:
-    #     name: "*"
-    #     state: latest
-    # - name: Install the Jenkins
-    #   ansible.builtin.apt:
-    #     name: jenkins
-    #     state: latest  
-    # - name: Make sure a service unit is running
-    #   ansible.builtin.systemd:
-    #     state: started
-    #     name: jenkins
-    #     enabled: yes
