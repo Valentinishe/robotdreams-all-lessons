@@ -9,12 +9,18 @@ Lesson #19
 - go to root folder in the project;
 
 ### Run
-- run `ansible-playbook -i inventory.ini playbook-full.yml`, if you want install all playbook;
-- run `ansible-playbook -i inventory.ini playbook-web.yml`, if you want install only nginx;
-- run `ansible-playbook -i inventory.ini playbook-db.yml`, if you want install only mysqlDB;
+- run `ansible-playbook -i inventory.ini playbook_full.yml --ask-vault-pass`, if you want install all playbook (with secrets);
+- run `ansible-playbook -i inventory.ini playbook_web.yml`, if you want install only nginx;
+- run `ansible-playbook -i inventory.ini playbook_db.yml --ask-vault-pass`, if you want install only mysqlDB (with secret);
 
 ### Login to MysqlDB (log in to the server using the MySQL Workbench client and credentials):
 - IP: `127.0.0.1`
 - Port: `3306`
 - Username: `developer`
 - Password: `3AMTf?DcXxpczeaUPx2_?tTethw4aFmF`
+
+### Creation Secret
+- run `ansible-vault encrypt_string`
+- create and confirm password for this secret
+- pass secret 
+- then run playbook with flag `--ask-vault-pass`
