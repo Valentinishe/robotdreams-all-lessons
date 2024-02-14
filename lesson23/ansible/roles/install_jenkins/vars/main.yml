@@ -1,0 +1,23 @@
+---
+
+jenkins_package_state: present
+jenkins_connection_retries: 60
+jenkins_connection_delay: 5
+jenkins_jar_location: /opt/jenkins-cli.jar
+jenkins_options: ""
+jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
+jenkins_url_prefix: ""
+jenkins_http_port: 8080
+
+
+jenkins_init_changes:
+  - option: "JENKINS_OPTS"
+    value: "{{ jenkins_options }}"
+  - option: "JAVA_OPTS"
+    value: "{{ jenkins_java_options }}"
+  - option: "JENKINS_HOME"
+    value: "{{ jenkins_home }}"
+  - option: "JENKINS_PREFIX"
+    value: "{{ jenkins_url_prefix }}"
+  - option: "JENKINS_PORT"
+    value: "{{ jenkins_http_port }}"

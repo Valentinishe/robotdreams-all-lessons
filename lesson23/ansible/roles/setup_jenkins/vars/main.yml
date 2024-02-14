@@ -1,0 +1,4 @@
+---
+jenkins_post_init_changes:
+  - option: "CASC_JENKINS_CONFIG"
+    value: "/var/lib/jenkins/casc.yaml"

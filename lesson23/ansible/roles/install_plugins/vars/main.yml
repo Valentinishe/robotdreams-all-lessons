@@ -1,0 +1,46 @@
+---
+
+jenkins_updates_url: "https://updates.jenkins.io"
+jenkins_plugin_timeout: 30
+jenkins_plugin_updates_expiration: 86400
+jenkins_plugins_install_dependencies: "true"
+jenkins_plugins_state: present
+
+jenkins_plugins:
+  - name: antisamy-markup-formatter
+  - name: prism-api
+  - name: docker-commons
+  - name: pipeline-rest-api
+  - name: pipeline-model-api
+  - name: pipeline-model-extensions
+  - name: pipeline-groovy-lib
+  - name: pipeline-stage-step
+  - name: pipeline-input-step
+  - name: pipeline-stage-tags-metadata
+  - name: token-macro
+  - name: authentication-tokens
+  - name: variant
+  - name: matrix-project
+  - name: junit
+  - name: workflow-durable-task-step
+  - name: workflow-basic-steps
+  - name: configuration-as-code
+  - name: matrix-auth
+  - name: pipeline-stage-view
+  - name: cloudbees-folder
+  - name: workflow-multibranch
+  - name: git
+  - name: ansicolor
+  - name: job-dsl
+  - name: pipeline-model-definition
+  - name: ssh-agent
+  - name: rebuild
+  - name: pipeline-build-step
+  - name: git-parameter
+  - name: docker-workflow
+  - name: http_request
+  - name: cloud-stats
+  - name: ssh-slaves
+  - name: htmlpublisher
+  - name: mailer
+  - name: slack

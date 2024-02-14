@@ -1,0 +1,36 @@
+- name: Install Jenkins and configure it
+  hosts: servers
+  become_user: root
+  become_method: sudo
+  become: true
+  vars:
+    jenkins_version: 2.435
+    jenkins_hostname: "34.194.23.244"
+    jenkins_port: 8080
+    jenkins_home: /var/lib/jenkins
+    jenkins_init_folder: "/etc/systemd/system/jenkins.service.d"
+    jenkins_init_file: "{{ jenkins_init_folder }}/override.conf"
+    jenkins_process_user: jenkins
+    jenkins_process_group: "{{ jenkins_process_user }}"
+
+    jenkins_admin_username: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          33376430623335646639643135663537386633346636356132376164613435663863363639373664
+          6632376563663737383066656336393432353738373630640a616331306637303433313533393839
+          66343138393930653935323638623839326266393034343935373661343838306465663638323031
+          3433666335306339640a616232613466326233626531303361623235656164663031393465353161
+          3739
+    jenkins_admin_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          61313739306464353433363862343266393233383038383130306530626439633334643739363635
+          6236653430303934636163623135323966366563313131650a626134653135613565636337623037
+          38393938623665633061636362343264643532376437323731636233313235613235313039373065
+          3766373639646461660a623166363432376361386430393633623632333461336664393837663035
+          3434
+
+  roles:
+    - ping
+    # - install_dependencies
+    # - install_jenkins
+    # - install_plugins
+    - setup_jenkins
