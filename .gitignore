@@ -1,3 +1,9 @@
 /**/app/node_modules/**
 /**/.vagrant/**
 /**/*.pem
+
+vpc-key.pem
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
