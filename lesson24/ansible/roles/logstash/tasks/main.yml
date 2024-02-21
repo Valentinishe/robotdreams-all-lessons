@@ -1,0 +1,19 @@
+---
+- name: Install logstash
+  ansible.builtin.apt:
+    name: logstash
+    state: present
+  notify: restart logstash
+
+- name: Configure logstash
+  ansible.builtin.template:
+    src: logstash.yml.j2
+    dest: /etc/logstash/logstash.yml
+    mode: 0644
+  notify: restart logstash
+
+- name: Enable and start logstash
+  ansible.builtin.systemd:
+    name: logstash
+    state: started
+    enabled: yes

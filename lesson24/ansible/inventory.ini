@@ -1,0 +1,2 @@
+[servers]
+server1 ansible_host=52.70.32.7 ansible_user=ubuntu ansible_ssh_private_key_file=../vpc-key.pem

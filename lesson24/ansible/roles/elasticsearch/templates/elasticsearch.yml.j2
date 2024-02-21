@@ -1,0 +1,13 @@
+cluster.name: my-elasticsearch-cluster
+node.name: "{{ansible_hostname}}"
+
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+
+network.host: {{server_host}}
+http.port: {{es_port}}
+
+discovery.type: {{discovery_type}}
+
+xpack.security.transport.ssl.enabled: {{transport_ssl_enabled}}
+xpack.security.http.ssl.enabled: {{http_ssl_enabled}}

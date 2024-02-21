@@ -1,0 +1,8 @@
+---
+
+- name: Ping EC2 Isntances
+  action: ping
+
+- name: EC2 {{ ansible_host }} instance is working
+  debug:
+    msg: "{{ ansible_host }} is working and reachble"

@@ -7,7 +7,7 @@ resource "aws_vpc" "VPC" {
   enable_dns_hostnames = true
   enable_dns_support   = true
   tags = {
-    Name = "VPC_JENKINS"
+    Name = "VPC_ELK"
     ENV  = var.env
   }
 }
@@ -18,7 +18,7 @@ resource "aws_subnet" "PUBLIC_VPC" {
   availability_zone       = var.availability_zone
   map_public_ip_on_launch = true
   tags = {
-    Name = "PUBLIC_SUBNET_JENKINS"
+    Name = "PUBLIC_SUBNET_ELK"
     ENV  = var.env
   }
 }
@@ -28,7 +28,7 @@ resource "aws_subnet" "PRIVATE_VPC" {
   cidr_block              = var.private_subnet_cidr
   map_public_ip_on_launch = true
   tags = {
-    Name = "PRIVATE_SUBNET_JENKINS"
+    Name = "PRIVATE_SUBNET_ELK"
     ENV  = var.env
   }
 }
@@ -36,7 +36,7 @@ resource "aws_subnet" "PRIVATE_VPC" {
 resource "aws_internet_gateway" "IGW" {
   vpc_id = aws_vpc.VPC.id
   tags = {
-    Name = "IGW_JENKINS"
+    Name = "IGW_ELK"
     ENV  = var.env
   }
 }
@@ -48,19 +48,19 @@ resource "aws_route_table" "PUBLIC_RT" {
     gateway_id = aws_internet_gateway.IGW.id
   }
   tags = {
-    Name = "PUBLIC_RT_JENKINS"
+    Name = "PUBLIC_RT_ELK"
     ENV  = var.env
   }
 }
 
-resource "aws_route_table_association" "PUBLIC_SUBNET_ASSOCIATION_JENKINS" {
+resource "aws_route_table_association" "PUBLIC_SUBNET_ASSOCIATION_ELK" {
   subnet_id      = aws_subnet.PUBLIC_VPC.id
   route_table_id = aws_route_table.PUBLIC_RT.id
 }
 
 resource "aws_security_group" "VPC_SG" {
-  name        = "VPC_SG_JENKINS"
-  description = "VPC_SG_JENKINS"
+  name        = "VPC_SG_ELK"
+  description = "VPC_SG_ELK"
   vpc_id      = aws_vpc.VPC.id
 
   ingress = [
@@ -85,19 +85,19 @@ resource "aws_security_group" "VPC_SG" {
   }
 }
 
-resource "aws_instance" "JENKINS_INSTANCE" {
+resource "aws_instance" "ELK_INSTANCE" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
   key_name               = var.key_pair_name
   subnet_id              = aws_subnet.PUBLIC_VPC.id
   vpc_security_group_ids = [aws_security_group.VPC_SG.id]
   tags = {
-    Name = "INSTANCE_JENKINS"
+    Name = "INSTANCE_ELK"
     ENV  = var.env
-    Role = "Jenkins"
+    Role = "ELK"
   }
 }
 
-resource "aws_eip" "VPC_JENKINS_EIP" {
-  instance = aws_instance.JENKINS_INSTANCE.id
+resource "aws_eip" "VPC_ELK_EIP" {
+  instance = aws_instance.ELK_INSTANCE.id
 }
