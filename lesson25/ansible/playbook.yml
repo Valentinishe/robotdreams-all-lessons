@@ -1,0 +1,33 @@
+- name: Install ELK and configure it
+  hosts: servers
+  become_user: root
+  become_method: sudo
+  become: true
+  vars:
+    # general
+    server_host: 0.0.0.0
+    security_enabled: false
+    security_http_ssl_enabled: false
+    security_transport_ssl_enabled: false
+    # elasticsearch
+    discovery_type: single-node
+    es_port: 9200
+    # kibana
+    kibana_port: 5601
+    kibana_username: kibana
+    kibana_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          33376430623335646639643135663537386633346636356132376164613435663863363639373664
+          6632376563663737383066656336393432353738373630640a616331306637303433313533393839
+          66343138393930653935323638623839326266393034343935373661343838306465663638323031
+          3433666335306339640a616232613466326233626531303361623235656164663031393465353161
+          3739
+    # logstash
+    beats_port: 5044
+
+  roles:
+    - ping
+    - elasticsearch
+    - kibana
+    - logstash
+    - filebeat

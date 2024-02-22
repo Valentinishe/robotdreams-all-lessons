@@ -1,0 +1,51 @@
+---
+
+- name: Install filebeat
+  ansible.builtin.apt:
+    name: filebeat
+    state: present
+
+- name: Configure filebeat
+  ansible.builtin.template:
+    src: filebeat.yml.j2
+    dest: filebeat.yml
+    mode: 0644
+
+- name: Enable and start filebeat
+  ansible.builtin.systemd:
+    name: filebeat
+    state: started
+    enabled: yes
+
+- name: Install metricbeat
+  ansible.builtin.apt:
+    name: metricbeat
+    state: present
+
+- name: Configure metricbeat
+  ansible.builtin.template:
+    src: metricbeat.yml.j2
+    dest: metricbeat.yml
+    mode: 0644
+
+- name: Enable and start metricbeat
+  ansible.builtin.systemd:
+    name: metricbeat
+    state: started
+    enabled: yes
+
+- name: Enable filebeat modules
+  shell: "filebeat modules enable system"
+
+- name: Enable metricbeat modules
+  shell: "metricbeat modules enable logstash"
+
+- name: Load the index template to ES and dashboards to Kibana
+  shell: |
+    filebeat setup --index-management -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["localhost:9200"]'
+    filebeat setup -E 'output.logstash.enabled=false' -E 'output.elasticsearch.hosts=["localhost:9200"]' -E setup.kibana.host=localhost:5601
+
+- name: Load the dashboards to ELK stack
+  shell: |
+    metricbeat setup --index-management -E output.logstash.enabled=false -E 'output.elasticsearch.hosts=["localhost:9200"]'
+    metricbeat setup -E 'output.logstash.enabled=false' -E 'output.elasticsearch.hosts=["localhost:9200"]' -E setup.kibana.host=localhost:5601
